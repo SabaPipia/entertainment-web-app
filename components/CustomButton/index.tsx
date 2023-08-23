@@ -6,7 +6,7 @@ function CustomButton({ onClick, type, children }: ButtonProps) {
     <button
       onClick={onClick}
       type={type}
-      className="bg-customRed p-3 rounded-md"
+      className="bg-customRed text-white p-3 rounded-md hover:bg-white hover:text-customRed"
     >
       {children}
     </button>
