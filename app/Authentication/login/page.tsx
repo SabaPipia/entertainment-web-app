@@ -20,16 +20,28 @@ function Login() {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => router.push("/home"))
-      .catch((err) => setError(err));
-    if (error.includes("user-not-found")) {
-      console.log("user not found");
-    }
+      .catch((err) => {
+        console.log([err][0].code);
+        switch ([err][0].code) {
+          case "auth/user-not-found":
+            setError("Email address not registered.");
+            break;
+          case "auth/invalid-email":
+            setError("Enter a valid email.");
+            break;
+          case "auth/wrong-password":
+            setError("Incorrect password, try again");
+            break;
+          default:
+            break;
+        }
+      });
   };
   return (
     <div className="flex flex-col gap-20 w-full h-full justify-center items-center">
       <Image src={logo} alt="logo" />
       <div className="text-white bg-semiDarkBlue p-8 flex flex-col gap-6 w-80 rounded-lg md:w-96">
-        <h3>Login</h3>
+        <h3 className="text-3xl">Login</h3>
         <form className="w-full flex flex-col gap-5" onSubmit={signIn}>
           <InputBar
             value={email}
@@ -46,6 +58,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <CustomButton type="submit">Create an account</CustomButton>
+          <p className="text-customRed text-xs text-center">{error}</p>
         </form>
         <p className="text-sm text-center">
           Don't have an account?{" "}

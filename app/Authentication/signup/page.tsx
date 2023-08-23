@@ -12,12 +12,28 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
+  const [error, setError] = useState("");
 
   const signUp = (e: any) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => console.log(userCredential))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log([err][0].code);
+        switch ([err][0].code) {
+          case "auth/invalid-email":
+            setError("Enter a valid email.");
+            break;
+          case "auth/email-already-in-use":
+            setError("This email address is already registered.");
+            break;
+          default:
+            break;
+        }
+        if (password != rePassword) {
+          setError("Passwords do not match");
+        }
+      });
   };
 
   return (
@@ -49,6 +65,7 @@ function SignUp() {
             onChange={(e) => setRePassword(e.target.value)}
           />
           <CustomButton type="submit">Create an account</CustomButton>
+          <p className="text-customRed text-xs text-center">{error}</p>
         </form>
         <p className="text-sm text-center">
           Already have an account?{" "}
