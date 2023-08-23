@@ -1,19 +1,17 @@
-"use client";
-
+import { useEffect, useState } from "react";
 import { auth } from "@/firebase/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
 
-export default function Home() {
+function AuthDetails() {
+  // TODO:usestate types
   const router = useRouter();
-  // router.push("/Authentication/login");
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
       if (user) {
         router.push("/home");
       } else {
-        router.push("/Authentication/login");
+        router.push("/");
       }
     });
     return () => {
@@ -21,5 +19,7 @@ export default function Home() {
     };
   }, []);
 
-  return <main></main>;
+  return;
 }
+
+export default AuthDetails;
