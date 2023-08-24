@@ -1,5 +1,5 @@
 import { InputBarProps } from "@/types";
-import React, { ChangeEvent } from "react";
+import React from "react";
 
 function InputBar({ onChange, value, name, type, placeHolder }: InputBarProps) {
   return (

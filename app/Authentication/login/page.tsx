@@ -10,18 +10,25 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase/firebase";
 import { useRouter } from "next/navigation";
 
+import { useDispatch } from "react-redux";
+import { setUser } from "@/store/authActions";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const dispatch = useDispatch();
+
   const router = useRouter();
   const signIn = (e: any) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => router.push("/home"))
+      .then((userCredential) => {
+        dispatch(setUser(userCredential));
+        router.push("/home");
+      })
       .catch((err) => {
-        console.log([err][0].code);
         switch ([err][0].code) {
           case "auth/user-not-found":
             setError("Email address not registered.");

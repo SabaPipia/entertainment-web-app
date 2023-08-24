@@ -1,19 +1,22 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React from "react";
-import app from "@/firebase/firebase";
+import React, { useContext } from "react";
 import { auth } from "@/firebase/firebase";
 import { signOut } from "firebase/auth";
+import { clearUser } from "@/store/authActions";
+import { useDispatch } from "react-redux";
 
 function Home() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const userSignOut = () => {
     signOut(auth)
       .then(() => {
+        dispatch(clearUser());
         router.push("/Authentication/login");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
   return (
     <div>

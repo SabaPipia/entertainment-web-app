@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export interface InputBarProps {
   placeHolder: string;
@@ -19,4 +19,10 @@ export interface Inputs {
   email: string;
   password: string;
   rePassword: string;
+}
+export interface AuthProps {
+  children: ReactNode;
+}
+export interface RouteGuardProps {
+  children: ReactNode;
 }

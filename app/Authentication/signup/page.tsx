@@ -17,9 +17,8 @@ function SignUp() {
   const signUp = (e: any) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => console.log(userCredential))
+      .then((userCredential) => {})
       .catch((err) => {
-        console.log([err][0].code);
         switch ([err][0].code) {
           case "auth/invalid-email":
             setError("Enter a valid email.");

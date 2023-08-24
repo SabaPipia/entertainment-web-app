@@ -1,7 +1,14 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+"use client";
 
+import "./globals.css";
+
+import { Provider } from "react-redux";
+import { store } from "@/store/authReducer";
+
+import type { Metadata } from "next";
+
+import { Inter } from "next/font/google";
+import RouteGuard from "./RouteGuard";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -17,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-darkBlue h-screen`}>
-        {children}
+        <Provider store={store}>
+          <RouteGuard>{children}</RouteGuard>
+        </Provider>
       </body>
     </html>
   );
