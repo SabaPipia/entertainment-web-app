@@ -1,16 +1,16 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "@/firebase/firebase";
 import { signOut } from "firebase/auth";
 import { clearUser } from "@/store/authActions";
 import { useDispatch } from "react-redux";
-import Link from "next/link";
 import SearchBar from "@/components/SearchBar";
 import Carousel from "@/components/Carousel";
 import Data from "@/data.json";
 import { DataTypes } from "@/types";
+import Card from "@/components/Card";
 
 function Home() {
   const [data, setData] = useState<DataTypes[]>();
@@ -29,14 +29,25 @@ function Home() {
       .catch((err) => {});
   };
   const carouselItems = data?.filter((item: DataTypes) => item.isTrending);
+  const recomendedItems = data?.filter((item: DataTypes) => !item.isTrending);
   return (
     <div className="p-3">
       <SearchBar />
       {pathname.includes("home") ? (
         <>
-          <h2 className="text-2xl text-white">Trending</h2>
+          <h2 className="text-2xl text-white mb-5">Trending</h2>
           {carouselItems ? (
             <Carousel item={carouselItems} />
+          ) : (
+            <p>Loading or empty data...</p>
+          )}
+        </>
+      ) : null}
+      {pathname.includes("home") ? (
+        <>
+          <h2 className="text-2xl text-white my-3">Recomended for you</h2>
+          {recomendedItems ? (
+            <Card item={recomendedItems} />
           ) : (
             <p>Loading or empty data...</p>
           )}

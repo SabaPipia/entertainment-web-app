@@ -48,3 +48,6 @@ export interface DataTypes {
 export interface CarouselProps {
   item: DataTypes[];
 }
+export interface CardProps {
+  item: DataTypes[];
+}
