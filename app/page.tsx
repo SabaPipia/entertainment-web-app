@@ -15,9 +15,7 @@ export default function Home() {
         router.push("/Authentication/login");
       }
     });
-    return () => {
-      listen();
-    };
+    return () => listen();
   }, []);
 
   return;

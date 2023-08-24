@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import logo from "@/assets/logo.svg";
+import logo from "@/public/assets/logo.svg";
 import { CustomButton, InputBar } from "@/components";
 import Link from "next/link";
 import { auth } from "@/firebase/firebase";

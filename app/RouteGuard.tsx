@@ -7,18 +7,19 @@ const RouteGuard = ({ children }: RouteGuardProps) => {
   const isAuthenticated = useSelector(
     (state: any) => state.auth.isAuthenticated
   );
+
   const router = useRouter();
   const pathname = usePathname();
+  // TODO: uncomment
+  // const AuthRoutes = ["/Authentication/login", "/Authentication/signup"];
 
-  const AuthRoutes = ["/Authentication/login", "/Authentication/signup"];
-
-  useEffect(() => {
-    if (!isAuthenticated && !AuthRoutes.includes(pathname)) {
-      router.push("/Authentication/login");
-    } else if (isAuthenticated && AuthRoutes.includes(pathname)) {
-      router.push("/home");
-    }
-  }, [isAuthenticated, router]);
+  // useEffect(() => {
+  //   if (!isAuthenticated && !AuthRoutes.includes(pathname)) {
+  //     router.push("/Authentication/login");
+  //   } else if (isAuthenticated && AuthRoutes.includes(pathname)) {
+  //     router.push("/home");
+  //   }
+  // }, [isAuthenticated]);
 
   return children;
 };

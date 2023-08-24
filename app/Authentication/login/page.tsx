@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import logo from "@/assets/logo.svg";
+import logo from "@/public/assets/logo.svg";
 import InputBar from "@/components/InputBar";
 import CustomButton from "@/components/CustomButton";
 import Link from "next/link";
