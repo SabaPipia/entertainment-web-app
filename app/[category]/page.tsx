@@ -31,28 +31,29 @@ function Home() {
   const carouselItems = data?.filter((item: DataTypes) => item.isTrending);
   const recomendedItems = data?.filter((item: DataTypes) => !item.isTrending);
   return (
-    <div className="p-3">
+    <div>
       <SearchBar />
       {pathname.includes("home") ? (
-        <>
+        <div>
           <h2 className="text-2xl text-white mb-5">Trending</h2>
           {carouselItems ? (
-            <Carousel item={carouselItems} />
+            <div>
+              <Carousel item={carouselItems} />
+            </div>
           ) : (
             <p>Loading or empty data...</p>
           )}
-        </>
+        </div>
       ) : null}
-      {pathname.includes("home") ? (
-        <>
-          <h2 className="text-2xl text-white my-3">Recomended for you</h2>
-          {recomendedItems ? (
-            <Card item={recomendedItems} />
-          ) : (
-            <p>Loading or empty data...</p>
-          )}
-        </>
-      ) : null}
+
+      <>
+        <h2 className="text-2xl text-white my-3">Recomended for you</h2>
+        {recomendedItems ? (
+          <Card item={recomendedItems} />
+        ) : (
+          <p>Loading or empty data...</p>
+        )}
+      </>
     </div>
   );
 }

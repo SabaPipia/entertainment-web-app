@@ -26,11 +26,15 @@ export default function RootLayout({
   const pathname = usePathname();
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-darkBlue h-screen`}>
+      <body className={`${inter.className} bg-darkBlue`}>
         <Provider store={store}>
           <RouteGuard>
-            {pathname.includes("Authentication") ? null : <Navigation />}
-            {children}
+            <div className="flex">
+              <div className="">
+                {pathname.includes("Authentication") ? null : <Navigation />}
+              </div>
+              <div className="w-full m-6">{children}</div>
+            </div>
           </RouteGuard>
         </Provider>
       </body>
