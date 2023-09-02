@@ -72,7 +72,7 @@ function Navigation() {
             </li>
           </ul>
         </div>
-        <div className="border-2 border-white rounded-full">
+        <div className="border-2 border-white rounded-full w-11">
           <Image src={Avatar} width={45} height={45} alt="avatar" />
         </div>
       </header>

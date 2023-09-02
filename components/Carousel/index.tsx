@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
@@ -13,7 +14,7 @@ export default function Carousel({ item }: CarouselProps) {
   return (
     <div className="swiper-container">
       <Swiper
-        slidesPerView={"auto"}
+        slidesPerView={'auto'}
         spaceBetween={30}
         className="mySwiper h-64 max-[1336px]:h-56"
       >

@@ -11,12 +11,10 @@ import { Inter } from "next/font/google";
 import RouteGuard from "./RouteGuard";
 import Navigation from "@/components/Navigation";
 import { usePathname } from "next/navigation";
+import { metadata } from "@/meta";
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "entertainment-app",
-  description: "this is movie and TV Shows website",
-};
+const pageMetadata = metadata.default;
 
 export default function RootLayout({
   children,
@@ -26,11 +24,14 @@ export default function RootLayout({
   const pathname = usePathname();
   return (
     <html lang="en">
+      <head>
+        <title>{pageMetadata.title}</title>
+      </head>
       <body className={`${inter.className} bg-darkBlue`}>
         <Provider store={store}>
           <RouteGuard>
             <div className="flex">
-              <div className="">
+              <div className="h-screen">
                 {pathname.includes("Authentication") ? null : <Navigation />}
               </div>
               <div className="w-full m-6">{children}</div>

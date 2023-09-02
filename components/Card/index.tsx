@@ -6,7 +6,7 @@ import BookmarkIcon from "../BookmarkIcon";
 
 function Card({ item }: CardProps) {
   return (
-    <div className="grid grid-cols-5 gap-5 w-full max-[1336px]:grid-cols-4">
+    <div className="grid grid-cols-5 gap-5 w-full max-[1336px]:grid-cols-4 max-[1200px]:h-3.5">
       {item.map((item) => {
         return (
           <div key={item.title}>
@@ -15,7 +15,7 @@ function Card({ item }: CardProps) {
                 backgroundImage: `linear-gradient(to top, rgba(5, 5, 5, 0.616), transparent),url(${item.thumbnail?.regular?.small})`,
               }}
               key={item.title}
-              className="h-52 w-full bg-cover bg-no-repeat bg-center rounded-lg max-[1200px]:h-40"
+              className="h-52 w-full bg-cover bg-no-repeat bg-center rounded-lg max-[1200px]:h-40 max-[1200px]:w-full"
             >
               <div className="flex justify-end p-2">
                 <BookmarkIcon />

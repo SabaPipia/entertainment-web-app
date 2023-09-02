@@ -31,7 +31,7 @@ function Home() {
   const carouselItems = data?.filter((item: DataTypes) => item.isTrending);
   const recomendedItems = data?.filter((item: DataTypes) => !item.isTrending);
   return (
-    <div>
+    <>
       <SearchBar />
       {pathname.includes("home") ? (
         <div>
@@ -54,7 +54,7 @@ function Home() {
           <p>Loading or empty data...</p>
         )}
       </>
-    </div>
+    </>
   );
 }
 
