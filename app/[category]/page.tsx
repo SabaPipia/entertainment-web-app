@@ -1,11 +1,8 @@
 "use client";
 
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { auth } from "@/firebase/firebase";
-import { signOut } from "firebase/auth";
-import { clearUser } from "@/store/authActions";
-import { useDispatch } from "react-redux";
+
 import SearchBar from "@/components/SearchBar";
 import Carousel from "@/components/Carousel";
 import Data from "@/data.json";
@@ -14,20 +11,13 @@ import Card from "@/components/Card";
 
 function Home() {
   const [data, setData] = useState<DataTypes[]>();
-  const router = useRouter();
+
   const pathname = usePathname();
-  const dispatch = useDispatch();
+
   useEffect(() => {
     setData(Data);
   }, []);
-  const userSignOut = () => {
-    signOut(auth)
-      .then(() => {
-        dispatch(clearUser());
-        router.push("/Authentication/login");
-      })
-      .catch((err) => {});
-  };
+
   const carouselItems = data?.filter((item: DataTypes) => item.isTrending);
 
   let recomendedItems: DataTypes[] | undefined;
@@ -61,7 +51,6 @@ function Home() {
     });
   }
 
-  console.log(BookmarkedMovies);
   return (
     <>
       <SearchBar />

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-
+import { auth } from "@/firebase/firebase";
+import { signOut } from "firebase/auth";
+import { clearUser } from "@/store/authActions";
+import { useDispatch } from "react-redux";
 import logo from "@/public/assets/logo.svg";
-import Home from "@/public/assets/icon-nav-home.svg";
-import Movie from "@/public/assets/icon-nav-movies.svg";
-import Series from "@/public/assets/icon-nav-tv-series.svg";
-import Bookmark from "@/public/assets/icon-nav-bookmark.svg";
 
 import Avatar from "@/public/assets/image-avatar.png";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 function Navigation() {
   const pathname = usePathname();
@@ -17,7 +16,16 @@ function Navigation() {
   useEffect(() => {
     setActiveSection(pathname);
   }, [pathname]);
-
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const userSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        dispatch(clearUser());
+        router.push("/Authentication/login");
+      })
+      .catch((err) => {});
+  };
   return (
     <div className="box-border h-full p-3">
       <header className="bg-semiDarkBlue h-full flex flex-col p-5 rounded-2xl max-md:flex-row max-md:justify-between max-md:items-center">
@@ -88,7 +96,10 @@ function Navigation() {
             </li>
           </ul>
         </div>
-        <div className="border-2 border-white rounded-full w-11 max-md:h-full">
+        <div
+          className="border-2 border-white rounded-full w-11 max-md:h-full"
+          onClick={userSignOut}
+        >
           <Image src={Avatar} width={45} height={45} alt="avatar" />
         </div>
       </header>

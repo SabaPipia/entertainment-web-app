@@ -1,8 +1,17 @@
 import { combineReducers } from "redux";
 import { createStore } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 const initialState = {
   user: null,
+  isAuthenticated: false,
+};
+
+const authPersistConfig = {
+  key: "auth",
+  storage: storage,
+  whitelist: ["user", "isAuthenticated"],
 };
 
 export const authReducer = (state = initialState, action: any) => {
@@ -25,7 +34,12 @@ export const authReducer = (state = initialState, action: any) => {
       return state;
   }
 };
-export const rootReducer = combineReducers({
-  auth: authReducer,
+// export const rootReducer = combineReducers({
+//   auth: authReducer,
+// });
+const rootReducer = combineReducers({
+  auth: persistReducer(authPersistConfig, authReducer),
 });
 export const store = createStore(rootReducer);
+export const persistor = persistStore(store);
+// export const store = createStore(rootReducer);
