@@ -6,7 +6,7 @@ import BookmarkIcon from "../BookmarkIcon";
 
 function Card({ item }: CardProps) {
   return (
-    <div className="grid grid-cols-5 gap-5 w-full max-[1336px]:grid-cols-4 max-[1200px]:h-3.5">
+    <div className="grid grid-cols-5 gap-5 w-full max-[1336px]:grid-cols-4 max-[950px]:grid-cols-3 max-[580px]:grid-cols-2">
       {item.map((item) => {
         return (
           <div key={item.title}>
@@ -15,14 +15,14 @@ function Card({ item }: CardProps) {
                 backgroundImage: `linear-gradient(to top, rgba(5, 5, 5, 0.616), transparent),url(${item.thumbnail?.regular?.small})`,
               }}
               key={item.title}
-              className="h-52 w-full bg-cover bg-no-repeat bg-center rounded-lg max-[1200px]:h-40 max-[1200px]:w-full"
+              className="h-52 w-full bg-cover bg-no-repeat bg-center rounded-lg max-[1200px]:h-40 max-[1200px]:w-full max-[660px]:h-28 max-[580px]:h-44 max-[444px]:h-28"
             >
               <div className="flex justify-end p-2">
                 <BookmarkIcon />
               </div>
             </div>
-            <div className="text-xs mt-2 ml-1">
-              <div className="flex text-white gap-1 font-extralight">
+            <div className="text-xs mt-2 ml-1 ">
+              <div className="flex text-white gap-1 font-extralight max-[400px]:text-[9px]">
                 <p>{item.year}</p>
                 <div className="w-1 h-1 rounded-full bg-white my-auto mx-1" />
                 <div className="flex gap-1">
@@ -34,7 +34,9 @@ function Card({ item }: CardProps) {
                 <div className="w-1 h-1 rounded-full bg-white my-auto mx-1" />
                 <p>{item.rating}</p>
               </div>
-              <p className="text-white md:text-lg">{item.title}</p>
+              <p className="text-white text-lg max-[580px]:text-sm max-[400px]:text-[12px]">
+                {item.title}
+              </p>
             </div>
           </div>
         );

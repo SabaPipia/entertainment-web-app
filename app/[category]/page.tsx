@@ -29,7 +29,21 @@ function Home() {
       .catch((err) => {});
   };
   const carouselItems = data?.filter((item: DataTypes) => item.isTrending);
-  const recomendedItems = data?.filter((item: DataTypes) => !item.isTrending);
+  let recomendedItems: DataTypes[] | undefined;
+  if (pathname === "/home") {
+    recomendedItems = data?.filter((item: DataTypes) => !item.isTrending);
+  } else if (pathname === "/movies") {
+    recomendedItems = data?.filter(
+      (item: DataTypes) => item.category === "Movie"
+    );
+  } else if (pathname === "/tv-series") {
+    recomendedItems = data?.filter(
+      (item: DataTypes) => item.category === "TV Series"
+    );
+  } else if (pathname === "/bookmarks") {
+    recomendedItems = data?.filter((item: DataTypes) => item.isBookmarked);
+  }
+
   return (
     <>
       <SearchBar />
@@ -37,9 +51,7 @@ function Home() {
         <div>
           <h2 className="text-2xl text-white mb-5">Trending</h2>
           {carouselItems ? (
-            <div>
-              <Carousel item={carouselItems} />
-            </div>
+            <Carousel item={carouselItems} />
           ) : (
             <p>Loading or empty data...</p>
           )}

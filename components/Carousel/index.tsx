@@ -11,12 +11,23 @@ import Movie from "@/public/assets/icon-category-movie.svg";
 import { CarouselProps } from "@/types";
 
 export default function Carousel({ item }: CarouselProps) {
+  const breakpoints = {
+    900: {
+      slidesPerView: 2.5,
+      spaceBetween: 20,
+    },
+    0: {
+      slidesPerView: 1.5,
+      spaceBetween: 20,
+    },
+  };
   return (
     <div className="swiper-container">
       <Swiper
-        slidesPerView={"auto"}
+        slidesPerView={2.5}
+        breakpoints={breakpoints}
         spaceBetween={30}
-        className="mySwiper h-64 max-[1336px]:h-56"
+        className="mySwiper h-64 w-full max-[1336px]:h-56 max-[580px]:h-40"
       >
         {item.map((item: any) => {
           return (
@@ -24,7 +35,7 @@ export default function Carousel({ item }: CarouselProps) {
               style={{
                 backgroundImage: `linear-gradient(to top, rgba(5, 5, 5, 0.616), transparent),url(${item.thumbnail.trending.large})`,
               }}
-              className="bg-no-repeat bg-cover w-full max-w-xl h-full"
+              className="bg-no-repeat bg-cover h-full rounded-xl"
               key={item.title}
             >
               <div className="p-3 flex flex-col justify-between h-full">

@@ -5,8 +5,6 @@ import "./globals.css";
 import { Provider } from "react-redux";
 import { store } from "@/store/authReducer";
 
-import type { Metadata } from "next";
-
 import { Inter } from "next/font/google";
 import RouteGuard from "./RouteGuard";
 import Navigation from "@/components/Navigation";
@@ -30,11 +28,13 @@ export default function RootLayout({
       <body className={`${inter.className} bg-darkBlue`}>
         <Provider store={store}>
           <RouteGuard>
-            <div className="flex">
-              <div className="h-screen">
+            <div className="flex max-md:flex-col h-full">
+              <div className="h-screen max-md:h-auto">
                 {pathname.includes("Authentication") ? null : <Navigation />}
               </div>
-              <div className="w-full m-6">{children}</div>
+              <div className="w-[calc(100%-108px)] p-6 max-md:w-full max-[580px]:pt-0">
+                {children}
+              </div>
             </div>
           </RouteGuard>
         </Provider>

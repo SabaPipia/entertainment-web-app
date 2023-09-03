@@ -19,13 +19,13 @@ function Navigation() {
   }, [pathname]);
 
   return (
-    <div className="box-border h-screen p-3">
-      <header className="bg-semiDarkBlue h-full flex flex-col p-5 rounded-2xl">
-        <div className="mb-11 mx-auto">
+    <div className="box-border h-full p-3">
+      <header className="bg-semiDarkBlue h-full flex flex-col p-5 rounded-2xl max-md:flex-row max-md:justify-between max-md:items-center">
+        <div className="mb-11 mx-auto max-md:m-0">
           <Image src={logo} alt="logo" />
         </div>
-        <div className="mb-auto">
-          <ul className="flex flex-col gap-6 my-auto">
+        <div className="mb-auto max-md:my-auto">
+          <ul className="flex flex-col gap-6 my-auto max-md:flex-row max-md:m-0">
             <li className="mx-auto">
               <Link href="/home">
                 <Image
@@ -33,7 +33,7 @@ function Navigation() {
                   alt="Home logo"
                   className={`${
                     activeSection === "/home" ? "brightness-[300]" : ""
-                  } max-w-none w-6`}
+                  } max-w-none w-6 max-[400px]:w-5`}
                 />
               </Link>
             </li>
@@ -44,7 +44,7 @@ function Navigation() {
                   alt="Movie logo"
                   className={`${
                     activeSection === "/movies" ? "brightness-[300]" : ""
-                  }  max-w-none w-6`}
+                  }  max-w-none w-6 max-[400px]:w-5`}
                 />
               </Link>
             </li>
@@ -55,7 +55,7 @@ function Navigation() {
                   alt="Series logo"
                   className={`${
                     activeSection === "/tv-series" ? "brightness-[300]" : ""
-                  } max-w-none w-6`}
+                  } max-w-none w-6 max-[400px]:w-5`}
                 />
               </Link>
             </li>
@@ -66,13 +66,13 @@ function Navigation() {
                   alt="Bookmark logo"
                   className={`${
                     activeSection === "/bookmarks" ? "brightness-[300]" : ""
-                  } max-w-none w-6`}
+                  } max-w-none w-6 max-[400px]:w-5`}
                 />
               </Link>
             </li>
           </ul>
         </div>
-        <div className="border-2 border-white rounded-full w-11">
+        <div className="border-2 border-white rounded-full w-11 max-md:h-full">
           <Image src={Avatar} width={45} height={45} alt="avatar" />
         </div>
       </header>
