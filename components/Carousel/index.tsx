@@ -4,8 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 import Image from "next/image";
-import BookmarkIcon from "../BookmarkIcon";
-
+import BookmarkIconEmpty from "@/public/assets/icon-bookmark-empty.svg";
+import BookmarkIconFull from "@/public/assets/icon-bookmark-full.svg";
+import PlayButton from "@/public/assets/icon-play.svg";
 import Movie from "@/public/assets/icon-category-movie.svg";
 
 import { CarouselProps } from "@/types";
@@ -35,12 +36,18 @@ export default function Carousel({ item }: CarouselProps) {
               style={{
                 backgroundImage: `linear-gradient(to top, rgba(5, 5, 5, 0.616), transparent),url(${item.thumbnail.trending.large})`,
               }}
-              className="bg-no-repeat bg-cover h-full rounded-xl"
+              className="bg-no-repeat bg-cover h-full rounded-xl group"
               key={item.title}
             >
-              <div className="p-3 flex flex-col justify-between h-full">
-                <div className="flex justify-end">
-                  <BookmarkIcon />
+              <div className="p-3 flex flex-col justify-between h-full hover:backdrop-brightness-50 relative">
+                <div className="w-8 h-8 bg-bookmarkDarkBlue rounded-full flex justify-center bg-opacity-50 ml-auto">
+                  <div className="my-auto">
+                    {item.isBookmarked ? (
+                      <Image src={BookmarkIconFull} alt="full bookmark" />
+                    ) : (
+                      <Image src={BookmarkIconEmpty} alt="empty bookmark" />
+                    )}
+                  </div>
                 </div>
                 <div className="mb-2">
                   <div className="flex text-white gap-1 font-extralight">
@@ -56,6 +63,10 @@ export default function Carousel({ item }: CarouselProps) {
                     <p>{item.rating}</p>
                   </div>
                   <p className="text-white md:text-2xl">{item.title}</p>
+                </div>
+                <div className="hidden cursor-pointer gap-3 absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%] items-center bg-slate-100 bg-opacity-50 rounded-full p-2 text-white hover:backdrop-brightness-50 group-hover:flex">
+                  <Image src={PlayButton} alt="play button " />
+                  <span>Play</span>
                 </div>
               </div>
             </SwiperSlide>
