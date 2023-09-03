@@ -1,22 +1,18 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
-
+import React, { useContext, useEffect, useState } from "react";
+import Data from "@/data.json";
 import SearchBar from "@/components/SearchBar";
 import Carousel from "@/components/Carousel";
-import Data from "@/data.json";
-import { DataTypes } from "@/types";
+
 import Card from "@/components/Card";
+import { DataTypes } from "@/types";
+import { dataContext } from "../layout";
 
 function Home() {
-  const [data, setData] = useState<DataTypes[]>();
-
   const pathname = usePathname();
-
-  useEffect(() => {
-    setData(Data);
-  }, []);
+  const { data, setData } = useContext(dataContext);
 
   const carouselItems = data?.filter((item: DataTypes) => item.isTrending);
 

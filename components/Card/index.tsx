@@ -1,12 +1,24 @@
-import { CardProps } from "@/types";
-import React from "react";
+import { CardProps, DataTypes } from "@/types";
+import React, { useContext } from "react";
 import Image from "next/image";
 import Movie from "@/public/assets/icon-category-movie.svg";
 import BookmarkIconEmpty from "@/public/assets/icon-bookmark-empty.svg";
 import BookmarkIconFull from "@/public/assets/icon-bookmark-full.svg";
 import PlayButton from "@/public/assets/icon-play.svg";
+import { useDispatch } from "@/context";
+import data from "@/data.json";
+import { dataContext } from "@/app/layout";
 
 function Card({ item }: CardProps) {
+  const dispatch = useDispatch();
+  const { data, setData } = useContext(dataContext);
+  const handleBookmarkClick = (title: string) => {
+    dispatch({
+      type: "bookmark",
+      task: { id: title },
+      data: data || [],
+    });
+  };
   return (
     <div className="grid grid-cols-5 gap-5 w-full max-[1336px]:grid-cols-4 max-[950px]:grid-cols-3 max-[580px]:grid-cols-2">
       {item.map((item) => {
@@ -20,13 +32,17 @@ function Card({ item }: CardProps) {
               className="h-52 w-full bg-cover bg-no-repeat bg-center rounded-lg max-[1200px]:h-40 max-[1200px]:w-full max-[660px]:h-28 max-[580px]:h-44 max-[444px]:h-28 transition-all cursor-pointer hover:brightness-50 group group-hover:brightness-50"
             ></div>
             <div className="flex justify-end p-2 absolute z-100 top-0 right-0 group cursor-pointer">
-              <div className="w-8 h-8 bg-bookmarkDarkBlue rounded-full flex justify-center bg-opacity-50">
+              <div
+                className="w-8 h-8 bg-bookmarkDarkBlue rounded-full flex justify-center bg-opacity-50"
+                onClick={() => item.title && handleBookmarkClick(item.title)}
+              >
                 <div className="my-auto">
-                  {item.isBookmarked ? (
-                    <Image src={BookmarkIconFull} alt="empty bookmark" />
-                  ) : (
-                    <Image src={BookmarkIconEmpty} alt="empty bookmark" />
-                  )}
+                  <Image
+                    src={
+                      item.isBookmarked ? BookmarkIconFull : BookmarkIconEmpty
+                    }
+                    alt="empty bookmark"
+                  />
                 </div>
               </div>
             </div>

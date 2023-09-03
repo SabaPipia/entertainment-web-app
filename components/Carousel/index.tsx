@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -10,8 +10,19 @@ import PlayButton from "@/public/assets/icon-play.svg";
 import Movie from "@/public/assets/icon-category-movie.svg";
 
 import { CarouselProps } from "@/types";
+import { useDispatch } from "@/context";
+import { dataContext } from "@/app/layout";
 
 export default function Carousel({ item }: CarouselProps) {
+  const dispatch = useDispatch();
+  const { data, setData } = useContext(dataContext);
+  const handleBookmarkClick = (title: string) => {
+    dispatch({
+      type: "bookmark",
+      task: { id: title },
+      data: data || [],
+    });
+  };
   const breakpoints = {
     900: {
       slidesPerView: 2.5,
@@ -40,13 +51,17 @@ export default function Carousel({ item }: CarouselProps) {
               key={item.title}
             >
               <div className="p-3 flex flex-col justify-between h-full hover:backdrop-brightness-50 relative">
-                <div className="w-8 h-8 bg-bookmarkDarkBlue rounded-full flex justify-center bg-opacity-50 ml-auto">
+                <div
+                  className="w-8 h-8 bg-bookmarkDarkBlue rounded-full flex justify-center bg-opacity-50 ml-auto"
+                  onClick={() => item.title && handleBookmarkClick(item.title)}
+                >
                   <div className="my-auto">
-                    {item.isBookmarked ? (
-                      <Image src={BookmarkIconFull} alt="full bookmark" />
-                    ) : (
-                      <Image src={BookmarkIconEmpty} alt="empty bookmark" />
-                    )}
+                    <Image
+                      src={
+                        item.isBookmarked ? BookmarkIconFull : BookmarkIconEmpty
+                      }
+                      alt="full bookmark"
+                    />
                   </div>
                 </div>
                 <div className="mb-2">

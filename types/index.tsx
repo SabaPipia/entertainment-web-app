@@ -51,3 +51,8 @@ export interface CarouselProps {
 export interface CardProps {
   item: DataTypes[];
 }
+
+export interface DataContextTypes {
+  data: DataTypes[];
+  setData: (data: DataTypes[]) => void;
+}

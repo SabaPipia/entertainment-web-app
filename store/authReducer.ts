@@ -34,12 +34,9 @@ export const authReducer = (state = initialState, action: any) => {
       return state;
   }
 };
-// export const rootReducer = combineReducers({
-//   auth: authReducer,
-// });
+
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
 });
 export const store = createStore(rootReducer);
 export const persistor = persistStore(store);
-// export const store = createStore(rootReducer);
