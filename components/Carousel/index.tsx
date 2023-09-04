@@ -15,7 +15,7 @@ import { dataContext } from "@/app/layout";
 
 export default function Carousel({ item }: CarouselProps) {
   const dispatch = useDispatch();
-  const { data, setData } = useContext(dataContext);
+  const { data } = useContext(dataContext);
   const handleBookmarkClick = (title: string) => {
     dispatch({
       type: "bookmark",
@@ -52,10 +52,10 @@ export default function Carousel({ item }: CarouselProps) {
             >
               <div className="p-3 flex flex-col justify-between h-full hover:backdrop-brightness-50 relative">
                 <div
-                  className="w-8 h-8 bg-bookmarkDarkBlue rounded-full flex justify-center bg-opacity-50 ml-auto"
+                  className="w-8 h-8 bg-bookmarkDarkBlue rounded-full flex justify-center bg-opacity-50 ml-auto hover:bg-white"
                   onClick={() => item.title && handleBookmarkClick(item.title)}
                 >
-                  <div className="my-auto">
+                  <div className="w-full h-full flex justify-center items-center hover:brightness-0">
                     <Image
                       src={
                         item.isBookmarked ? BookmarkIconFull : BookmarkIconEmpty

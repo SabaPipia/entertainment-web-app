@@ -33,10 +33,10 @@ function Card({ item }: CardProps) {
             ></div>
             <div className="flex justify-end p-2 absolute z-100 top-0 right-0 group cursor-pointer">
               <div
-                className="w-8 h-8 bg-bookmarkDarkBlue rounded-full flex justify-center bg-opacity-50"
+                className="w-8 h-8 bg-bookmarkDarkBlue rounded-full flex justify-center bg-opacity-50 hover:bg-white"
                 onClick={() => item.title && handleBookmarkClick(item.title)}
               >
-                <div className="my-auto">
+                <div className="w-full h-full flex justify-center items-center hover:brightness-0">
                   <Image
                     src={
                       item.isBookmarked ? BookmarkIconFull : BookmarkIconEmpty

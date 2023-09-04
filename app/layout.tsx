@@ -33,11 +33,6 @@ export default function RootLayout({
   const pathname = usePathname();
 
   const [data, setData] = useState<DataTypes[]>(Data);
-
-  // console.log(Data);
-  // useEffect(() => {
-  //   setData(Data);
-  // }, []);
   return (
     <html lang="en">
       <head>
