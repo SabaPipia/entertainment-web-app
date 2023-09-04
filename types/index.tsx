@@ -56,3 +56,10 @@ export interface DataContextTypes {
   data: DataTypes[];
   setData: (data: DataTypes[]) => void;
 }
+
+export interface InputProps {
+  isSearching: boolean;
+  setSearching: (searching: boolean) => void;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
+}
