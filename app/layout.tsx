@@ -53,7 +53,8 @@ export default function RootLayout({
                     )}
                     <div
                       className={`${
-                        pathname === "/error"
+                        pathname === "/error" ||
+                        pathname.includes("Authentication")
                           ? "w-full"
                           : "w-[calc(100%-108px)] p-6"
                       }  max-md:w-full max-[580px]:pt-0`}
