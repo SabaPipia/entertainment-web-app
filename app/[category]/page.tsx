@@ -1,18 +1,14 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import React, { useContext, useEffect, useState } from "react";
-import Data from "@/data.json";
-import SearchBar from "@/components/SearchBar";
-import Carousel from "@/components/Carousel";
-
-import Card from "@/components/Card";
+import React, { useContext, useState } from "react";
+import { SearchBar, Carousel, Card } from "@/components";
 import { DataTypes } from "@/types";
 import { dataContext } from "../layout";
 
 function Home() {
   const pathname = usePathname();
-  const { data, setData } = useContext(dataContext);
+  const { data } = useContext(dataContext);
   const carouselItems = data?.filter((item: DataTypes) => item.isTrending);
   const [isSearching, setIsSearching] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -51,7 +47,9 @@ function Home() {
   if (isSearching) {
     if (pathname === "/home") {
       recomendedItems = data?.filter((item: DataTypes) =>
-        item.title?.includes(searchValue.toLocaleLowerCase())
+        item.title
+          ?.toLocaleLowerCase()
+          .includes(searchValue.toLocaleLowerCase())
       );
     } else if (pathname === "/movies") {
       recomendedItems = data?.filter((item: DataTypes) => {

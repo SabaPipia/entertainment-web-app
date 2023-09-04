@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { auth } from "@/firebase/firebase";
 import { signOut } from "firebase/auth";
 import { clearUser } from "@/store/authActions";
 import { useDispatch } from "react-redux";
-import logo from "@/public/assets/logo.svg";
-
-import Avatar from "@/public/assets/image-avatar.png";
 import { useRouter, usePathname } from "next/navigation";
+
+import Link from "next/link";
+import Image from "next/image";
+import logo from "@/public/assets/logo.svg";
+import Avatar from "@/public/assets/image-avatar.png";
 
 function Navigation() {
   const pathname = usePathname();

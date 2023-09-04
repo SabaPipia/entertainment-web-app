@@ -1,17 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/store/authActions";
+
 import Image from "next/image";
 import logo from "@/public/assets/logo.svg";
 import InputBar from "@/components/InputBar";
 import CustomButton from "@/components/CustomButton";
 import Link from "next/link";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase/firebase";
-import { useRouter } from "next/navigation";
-
-import { useDispatch } from "react-redux";
-import { setUser } from "@/store/authActions";
 
 function Login() {
   const [email, setEmail] = useState("");

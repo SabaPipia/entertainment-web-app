@@ -10,7 +10,21 @@ const RouteGuard = ({ children }: RouteGuardProps) => {
 
   const router = useRouter();
   const pathname = usePathname();
-  // TODO: uncomment
+  const routes = [
+    "/Authentication/login",
+    "/Authentication/signup",
+    "/home",
+    "/movies",
+    "/tv-series",
+    "/bookmarks",
+  ];
+  useEffect(() => {
+    const path = routes.find((item: any) => item === pathname);
+    if (!path) {
+      router.push(`/error`);
+    }
+  }, [pathname]);
+
   const AuthRoutes = ["/Authentication/login", "/Authentication/signup"];
 
   useEffect(() => {

@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
-import logo from "@/public/assets/logo.svg";
 import { CustomButton, InputBar } from "@/components";
-import Link from "next/link";
 import { auth } from "@/firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+
+import Image from "next/image";
+import logo from "@/public/assets/logo.svg";
+import Link from "next/link";
 
 function SignUp() {
   const [email, setEmail] = useState("");

@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
 
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { CarouselProps } from "@/types";
+import { useDispatch } from "@/context";
+import { dataContext } from "@/app/layout";
 
 import Image from "next/image";
 import BookmarkIconEmpty from "@/public/assets/icon-bookmark-empty.svg";
 import BookmarkIconFull from "@/public/assets/icon-bookmark-full.svg";
 import PlayButton from "@/public/assets/icon-play.svg";
 import Movie from "@/public/assets/icon-category-movie.svg";
-
-import { CarouselProps } from "@/types";
-import { useDispatch } from "@/context";
-import { dataContext } from "@/app/layout";
 
 export default function Carousel({ item }: CarouselProps) {
   const dispatch = useDispatch();

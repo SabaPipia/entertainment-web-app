@@ -1,17 +1,17 @@
-import { CardProps, DataTypes } from "@/types";
+import { CardProps } from "@/types";
 import React, { useContext } from "react";
+import { useDispatch } from "@/context";
+import { dataContext } from "@/app/layout";
+
 import Image from "next/image";
 import Movie from "@/public/assets/icon-category-movie.svg";
 import BookmarkIconEmpty from "@/public/assets/icon-bookmark-empty.svg";
 import BookmarkIconFull from "@/public/assets/icon-bookmark-full.svg";
 import PlayButton from "@/public/assets/icon-play.svg";
-import { useDispatch } from "@/context";
-import data from "@/data.json";
-import { dataContext } from "@/app/layout";
 
 function Card({ item }: CardProps) {
   const dispatch = useDispatch();
-  const { data, setData } = useContext(dataContext);
+  const { data } = useContext(dataContext);
   const handleBookmarkClick = (title: string) => {
     dispatch({
       type: "bookmark",
@@ -63,7 +63,7 @@ function Card({ item }: CardProps) {
                 {item.title}
               </p>
             </div>
-            <div className="hidden gap-3 absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-100%] items-center bg-slate-100 bg-opacity-50 rounded-full p-2 text-white cursor-pointer group-hover:flex max-[400px]:gap-">
+            <div className="hidden gap-3 absolute top-2/4 left-2/4 translate-x-[-50%] translate-y-[-100%] items-center bg-slate-100 bg-opacity-50 rounded-full p-2 text-white cursor-pointer group-hover:flex max-[400px]:gap-[2px]">
               <Image src={PlayButton} alt="play button" />
               <span>Play</span>
             </div>
