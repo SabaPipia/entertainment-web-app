@@ -17,6 +17,4 @@ export default function Home() {
     });
     return () => listen();
   }, []);
-
-  return;
 }

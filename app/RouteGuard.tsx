@@ -30,7 +30,10 @@ const RouteGuard = ({ children }: RouteGuardProps) => {
   useEffect(() => {
     if (!isAuthenticated && !AuthRoutes.includes(pathname)) {
       router.push("/Authentication/login");
-    } else if (isAuthenticated && AuthRoutes.includes(pathname)) {
+    } else if (
+      (isAuthenticated && AuthRoutes.includes(pathname)) ||
+      pathname === "/"
+    ) {
       router.push("/home");
     }
   }, [isAuthenticated]);

@@ -64,7 +64,7 @@ function Login() {
             placeHolder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <CustomButton type="submit">Create an account</CustomButton>
+          <CustomButton type="submit">Login to your account</CustomButton>
           <p className="text-customRed text-xs text-center">{error}</p>
         </form>
         <p className="text-sm text-center">
