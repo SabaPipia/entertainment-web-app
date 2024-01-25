@@ -1,4 +1,4 @@
-import CustomButton from "./CustomButton";
+import CustomButton from "./ui/Auth/SubmitButton";
 import InputBar from "./InputBar";
 import Navigation from "./Navigation";
 import SearchBar from "./SearchBar";

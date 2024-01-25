@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ErrorTextAuth({
+export default function ErrorText({
   complete,
   error,
 }: {
