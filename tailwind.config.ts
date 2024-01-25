@@ -13,6 +13,7 @@ const config: Config = {
       },
       colors: {
         customRed: "#FC4747",
+        customGreen: "#47FC47",
         darkBlue: "#10141E",
         bookmarkDarkBlue: "#3f424a",
         greyishBlue: "#5A698F",
