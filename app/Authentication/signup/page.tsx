@@ -5,6 +5,7 @@ import React, {
   FormEvent,
   ChangeEventHandler,
   ChangeEvent,
+  FormEventHandler,
 } from "react";
 import { CustomButton, InputBar } from "@/components";
 import { auth } from "@/firebase/firebase";
@@ -13,7 +14,10 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import Image from "next/image";
 import logo from "@/public/assets/logo.svg";
 import Link from "next/link";
-import ErrorTextAuth from "@/components/ui/ErrorTextAuth";
+import ErrorText from "@/components/ui/Auth/ErrorText";
+import Footer from "@/components/ui/Auth/Footer";
+import Header from "@/components/ui/Auth/Header";
+import { signUp } from "../helper";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -46,28 +50,16 @@ function SignUp() {
     },
   ];
 
-  const signUp = (e: FormEvent) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        setError("");
-        setComplete("Registration successful!");
-      })
-      .catch((err) => {
-        switch ([err][0].code) {
-          case "auth/invalid-email":
-            setError("Enter a valid email.");
-            break;
-          case "auth/email-already-in-use":
-            setError("This email address is already registered.");
-            break;
-          default:
-            break;
-        }
-        if (password != rePassword) {
-          setError("Passwords do not match");
-        }
-      });
+    signUp({
+      e,
+      email,
+      password,
+      setError,
+      setComplete,
+      rePassword,
+    });
   };
 
   return (
@@ -75,8 +67,8 @@ function SignUp() {
       <Image src={logo} alt="logo" />
 
       <div className="text-white bg-semiDarkBlue p-8 flex flex-col gap-6 w-80 rounded-lg md:w-96">
-        <h3 className="text-3xl">Sign Up</h3>
-        <form className="w-full flex flex-col gap-5" onSubmit={signUp}>
+        <Header title="Sign Up" />
+        <form className="w-full flex flex-col gap-5" onSubmit={handleSubmit}>
           {inputs.map((input) => {
             return (
               <InputBar
@@ -90,14 +82,9 @@ function SignUp() {
             );
           })}
           <CustomButton type="submit">Create an account</CustomButton>
-          <ErrorTextAuth complete={complete} error={error} />
+          <ErrorText complete={complete} error={error} />
         </form>
-        <p className="text-sm text-center">
-          Already have an account?{" "}
-          <Link className="text-customRed" href="/Authentication/login">
-            Login
-          </Link>
-        </p>
+        <Footer href="/Authentication/login" />
       </div>
     </div>
   );
