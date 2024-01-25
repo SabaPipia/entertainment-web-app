@@ -1,19 +1,10 @@
 "use client";
 
-import React, {
-  useState,
-  FormEvent,
-  ChangeEventHandler,
-  ChangeEvent,
-  FormEventHandler,
-} from "react";
+import React, { useState, ChangeEvent, FormEventHandler } from "react";
 import { CustomButton, InputBar } from "@/components";
-import { auth } from "@/firebase/firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 
 import Image from "next/image";
 import logo from "@/public/assets/logo.svg";
-import Link from "next/link";
 import ErrorText from "@/components/ui/Auth/ErrorText";
 import Footer from "@/components/ui/Auth/Footer";
 import Header from "@/components/ui/Auth/Header";
