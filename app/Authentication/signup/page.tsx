@@ -9,6 +9,7 @@ import Header from "@/components/ui/Auth/Header";
 import { signUp } from "../helper";
 import { useRouter } from "next/navigation";
 import { SpinningCircles } from "react-loading-icons";
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -17,17 +18,20 @@ function SignUp() {
   const [error, setError] = useState("");
   const [complete, setComplete] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const inputs = [
     {
       value: email,
       name: "email",
+      type: "email",
       placeHolder: "Email adress",
       onChange: (e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value),
     },
     {
       value: password,
       name: "password",
+      type: isPasswordVisible ? "text" : "password",
       placeHolder: "Password",
       onChange: (e: ChangeEvent<HTMLInputElement>) =>
         setPassword(e.target.value),
@@ -35,7 +39,7 @@ function SignUp() {
     {
       value: rePassword,
       name: "rePassword",
-      type: "password",
+      type: isPasswordVisible ? "text" : "password",
       placeHolder: "Repeat Password",
       onChange: (e: ChangeEvent<HTMLInputElement>) =>
         setRePassword(e.target.value),
@@ -71,6 +75,14 @@ function SignUp() {
               type={input.type || input.name}
               placeHolder={input.placeHolder}
               onChange={input.onChange}
+              icon={
+                <div
+                  className="cursor-pointer"
+                  onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                >
+                  {isPasswordVisible ? <IoEye /> : <IoEyeOff />}
+                </div>
+              }
             />
           );
         })}

@@ -6,6 +6,7 @@ export interface InputBarProps {
   type: string;
   value: any;
   onChange: (e: any) => void;
+  icon: ReactNode;
 }
 export interface ButtonProps {
   onClick?: () => void;
