@@ -11,6 +11,7 @@ export interface ButtonProps {
   onClick?: () => void;
   children: ReactNode;
   type?: "button" | "submit" | "reset";
+  loading: boolean;
 }
 export interface AuthProviderProps {
   children: ReactNode;

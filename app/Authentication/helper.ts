@@ -6,6 +6,10 @@ import { Dispatch, FormEvent, SetStateAction } from "react";
 import { auth } from "@/firebase/firebase";
 import { setUser } from "@/store/authActions";
 
+type Router = {
+  push: (url: string) => void;
+};
+
 export const signUp = ({
   e,
   email,
@@ -13,6 +17,8 @@ export const signUp = ({
   setError,
   setComplete,
   rePassword,
+  setLoading,
+  router,
 }: {
   e: FormEvent;
   email: string;
@@ -20,14 +26,20 @@ export const signUp = ({
   setError: Dispatch<SetStateAction<string>>;
   setComplete: Dispatch<SetStateAction<string>>;
   rePassword: string;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  router: Router;
 }) => {
   e.preventDefault();
+  setLoading(true);
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       setError("");
       setComplete("Registration successful!");
+      setLoading(false);
+      router.push("/Authentication/login");
     })
     .catch((err) => {
+      setLoading(false);
       switch ([err][0].code) {
         case "auth/invalid-email":
           setError("Enter a valid email.");
@@ -45,10 +57,6 @@ export const signUp = ({
 };
 
 type AppDispatch = Dispatch<any>;
-
-type Router = {
-  push: (url: string) => void;
-};
 
 export const signIn = ({
   e,
@@ -73,7 +81,6 @@ export const signIn = ({
     .then((userCredential) => {
       dispatch(setUser(userCredential));
       router.push("/home");
-      // setLoading(false);
     })
     .catch((err) => {
       setLoading(false);
