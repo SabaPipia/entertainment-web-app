@@ -75,7 +75,7 @@ function SignUp() {
           <CustomButton type="submit">Create an account</CustomButton>
           <ErrorText complete={complete} error={error} />
         </form>
-        <Footer href="/Authentication/login" />
+        <Footer href="/login" />
       </div>
     </div>
   );

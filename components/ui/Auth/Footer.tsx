@@ -5,7 +5,7 @@ export default function Footer({ href }: { href: string }) {
   return (
     <p className="text-sm text-center">
       Already have an account?{" "}
-      <Link className="text-customRed" href={href}>
+      <Link className="text-customRed" href={`/Authentication${href}`}>
         Login
       </Link>
     </p>

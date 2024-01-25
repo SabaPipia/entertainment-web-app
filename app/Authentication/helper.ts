@@ -5,7 +5,6 @@ import {
 import { Dispatch, FormEvent, SetStateAction } from "react";
 import { auth } from "@/firebase/firebase";
 import { setUser } from "@/store/authActions";
-import { useDispatch } from "react-redux";
 
 export const signUp = ({
   e,
@@ -49,7 +48,6 @@ type AppDispatch = Dispatch<any>;
 
 type Router = {
   push: (url: string) => void;
-  // Add other router methods you use if necessary
 };
 
 export const signIn = ({
@@ -59,6 +57,7 @@ export const signIn = ({
   setError,
   dispatch,
   router,
+  setLoading,
 }: {
   e: FormEvent;
   email: string;
@@ -66,14 +65,18 @@ export const signIn = ({
   setError: Dispatch<SetStateAction<string>>;
   dispatch: AppDispatch;
   router: Router;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }) => {
   e.preventDefault();
+  setLoading(true);
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       dispatch(setUser(userCredential));
       router.push("/home");
+      // setLoading(false);
     })
     .catch((err) => {
+      setLoading(false);
       switch ([err][0].code) {
         case "auth/user-not-found":
           setError("Email address not registered.");

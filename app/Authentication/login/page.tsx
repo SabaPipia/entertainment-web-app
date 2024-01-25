@@ -13,11 +13,13 @@ import { Dispatch } from "redux";
 import { signIn } from "../helper";
 import Header from "@/components/ui/Auth/Header";
 import ErrorText from "@/components/ui/Auth/ErrorText";
+import Footer from "@/components/ui/Auth/Footer";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const dispatch: Dispatch = useDispatch();
   const router = useRouter();
@@ -47,6 +49,7 @@ function Login() {
       setError,
       dispatch,
       router,
+      setLoading,
     });
   };
 
@@ -67,15 +70,12 @@ function Login() {
               />
             );
           })}
-          <CustomButton type="submit">Login to your account</CustomButton>
+          <CustomButton type="submit">
+            {loading ? "loading" : "Login to your account"}
+          </CustomButton>
           <ErrorText complete={""} error={error} />
         </form>
-        <p className="text-sm text-center">
-          Don't have an account?{" "}
-          <Link className="text-customRed" href="/Authentication/signup">
-            Sign Up
-          </Link>
-        </p>
+        <Footer href={"/signup"} />
       </div>
     </div>
   );

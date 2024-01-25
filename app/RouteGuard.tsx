@@ -3,9 +3,15 @@ import { useRouter, usePathname } from "next/navigation";
 import { RouteGuardProps } from "@/types";
 import { useEffect } from "react";
 
+interface RootState {
+  auth: {
+    isAuthenticated: boolean;
+  };
+}
+
 const RouteGuard = ({ children }: RouteGuardProps) => {
   const isAuthenticated = useSelector(
-    (state: any) => state.auth.isAuthenticated
+    (state: RootState) => state.auth.isAuthenticated
   );
 
   const router = useRouter();
@@ -19,7 +25,7 @@ const RouteGuard = ({ children }: RouteGuardProps) => {
     "/bookmarks",
   ];
   useEffect(() => {
-    const path = routes.find((item: any) => item === pathname);
+    const path = routes.find((item: string) => item === pathname);
     if (!path) {
       router.push(`/error`);
     }
