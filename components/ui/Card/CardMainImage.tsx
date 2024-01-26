@@ -5,14 +5,15 @@ import { dataContext } from "@/app/layout";
 import BookmarkIconEmpty from "@/public/assets/icon-bookmark-empty.svg";
 import BookmarkIconFull from "@/public/assets/icon-bookmark-full.svg";
 import PlayButton from "@/public/assets/icon-play.svg";
+
 export default function CardMainImage({
   title,
   isBookmarked,
   thumbnail,
 }: {
-  title: string | undefined;
-  isBookmarked: boolean | undefined;
-  thumbnail: string | undefined;
+  title?: string;
+  isBookmarked?: boolean;
+  thumbnail?: string;
 }) {
   const dispatch = useDispatch();
   const { data } = useContext(dataContext);
@@ -23,9 +24,9 @@ export default function CardMainImage({
       data: data || [],
     });
   };
-  console.log(typeof thumbnail);
+
   return (
-    <div key={title} className="relative group">
+    <div className="relative group">
       <div
         style={{
           backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.50), transparent),url(${thumbnail})`,
